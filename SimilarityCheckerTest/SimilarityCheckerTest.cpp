@@ -54,3 +54,10 @@ TEST_F(SimilarityCheckerTestFixture, GetTotalLegnthMoreThanDouble) {
 	// doubles of given length
 	EXPECT_EQ(0, m_pChecker->GetLegthPoints("ABCDABCD"));
 }
+
+
+TEST_F(SimilarityCheckerTestFixture, GetPartialPoints) {
+	// Half of given length
+	EXPECT_EQ(40, m_pChecker->GetLegthPoints("ABC"));
+	EXPECT_EQ(45, m_pChecker->GetLegthPoints("ABCDE"));
+}
