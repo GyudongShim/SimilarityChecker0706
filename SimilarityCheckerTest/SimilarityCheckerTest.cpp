@@ -24,7 +24,7 @@ public:
 	{
 		try
 		{
-			m_pChecker->GetLegthPoints(inputString);
+			m_pChecker->GetLengthPoint(inputString);
 			FAIL();
 		} catch (exception e)
 		{
@@ -35,29 +35,44 @@ public:
 
 TEST_F(SimilarityCheckerTestFixture, AssertIllegalInputs) {
 	AssertIllegalArgument("");
+	// Check small character
+	AssertIllegalArgument("AAAaaBBBB"); 
 }
 
 TEST_F(SimilarityCheckerTestFixture, GetTotalLengthWithSameLength) {
-	int lengthPoint = m_pChecker->GetLegthPoints("ABCD");
+	int lengthPoint = m_pChecker->GetLengthPoint("ABCD");
 	EXPECT_EQ(60, lengthPoint);
 }
 
 
 TEST_F(SimilarityCheckerTestFixture, GetTotalLegnthMoreThanDouble) {
 	// Half of given length
-	EXPECT_EQ(0, m_pChecker->GetLegthPoints("AB"));
+	EXPECT_EQ(0, m_pChecker->GetLengthPoint("AB"));
 
 	// Half of given length
-	EXPECT_EQ(0, m_pChecker->GetLegthPoints("A"));
+	EXPECT_EQ(0, m_pChecker->GetLengthPoint("A"));
 
 	// doubles of given length
-	EXPECT_EQ(0, m_pChecker->GetLegthPoints("ABCDABCD"));
-	EXPECT_EQ(0, m_pChecker->GetLegthPoints("ABCDABCDEFGH"));
+	EXPECT_EQ(0, m_pChecker->GetLengthPoint("ABCDABCD"));
+	EXPECT_EQ(0, m_pChecker->GetLengthPoint("ABCDABCDEFGH"));
 }
 
 
-TEST_F(SimilarityCheckerTestFixture, GetPartialPoints) {
+TEST_F(SimilarityCheckerTestFixture, GetPartialLengthPoints) {
 	// Half of given length
-	EXPECT_EQ(40, m_pChecker->GetLegthPoints("ABC"));
-	EXPECT_EQ(45, m_pChecker->GetLegthPoints("ABCDE"));
+	EXPECT_EQ(40, m_pChecker->GetLengthPoint("ABC"));
+	EXPECT_EQ(45, m_pChecker->GetLengthPoint("ABCDE"));
 }
+
+TEST_F(SimilarityCheckerTestFixture, SameAlphabet) {
+	EXPECT_EQ(40, m_pChecker->GetAlphabetPoint("DCBA"));
+}
+
+TEST_F(SimilarityCheckerTestFixture, OneDiff) {
+	EXPECT_EQ(32, m_pChecker->GetAlphabetPoint("ABCDE"));
+}
+
+TEST_F(SimilarityCheckerTestFixture, AllDiff) {
+	EXPECT_EQ(0, m_pChecker->GetAlphabetPoint("EFGHI"));
+}
+
