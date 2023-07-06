@@ -33,12 +33,8 @@ public:
 	}
 };
 
-
-// To be used for 2nd
 TEST_F(SimilarityCheckerTestFixture, AssertIllegalInputs) {
-
-	// Long length
-	// AssertIllegalArgument("DDDDDDDD");
+	AssertIllegalArgument("");
 }
 
 TEST_F(SimilarityCheckerTestFixture, GetTotalLengthWithSameLength) {
@@ -51,8 +47,12 @@ TEST_F(SimilarityCheckerTestFixture, GetTotalLegnthMoreThanDouble) {
 	// Half of given length
 	EXPECT_EQ(0, m_pChecker->GetLegthPoints("AB"));
 
+	// Half of given length
+	EXPECT_EQ(0, m_pChecker->GetLegthPoints("A"));
+
 	// doubles of given length
 	EXPECT_EQ(0, m_pChecker->GetLegthPoints("ABCDABCD"));
+	EXPECT_EQ(0, m_pChecker->GetLegthPoints("ABCDABCDEFGH"));
 }
 
 

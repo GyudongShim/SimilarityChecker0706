@@ -11,9 +11,12 @@ public:
 		originalString = str;
 	}
 
-
 	int GetLegthPoints(const string& matchingString)
 	{
+		// Defense divided by zero
+		if (matchingString.length() == 0)
+			throw invalid_argument("Zero string is not allowed.");
+
 		if (matchingString.length() == originalString.length())
 			return MAX_LENGTH_POINT;
 
@@ -25,14 +28,8 @@ public:
 		if (matchingString.length() >= originalString.length() * 2)
 			return 0;
 
-		// Defense divided by zero
-		if (matchingString.length() == 0)
-			throw invalid_argument("Zero string is not allowed.");
-
-		// Gab
 		return GetPartialLengthPoint(matchingString);
 	}
-
 
 private:
 
