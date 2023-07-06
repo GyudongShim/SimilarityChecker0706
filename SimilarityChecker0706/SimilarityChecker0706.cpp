@@ -20,11 +20,11 @@ public:
 
 		// Too short to be checked
 		if (matchingString.length() * 2 <= m_originalString.length())
-			return 0;
+			return MIN_POINT;
 
 		// Too long to be checked
 		if (matchingString.length() >= m_originalString.length() * 2)
-			return 0;
+			return MIN_POINT;
 
 		return GetPartialLengthPoint(matchingString);
 	}
@@ -40,7 +40,6 @@ public:
 		// 1. Use count sorting to check alphabet
 		int numberOfAlphabetMine[NUMBER_OF_ALPHABETS] = {0, };
 		int numberOfAlphabetGiven[NUMBER_OF_ALPHABETS] = {0, };
-
 
 		for (const auto alphabet : matchingString)
 		{
@@ -71,7 +70,7 @@ public:
 			differentAlphabets++;
 		}
 
-		return (sameAlphabets * 40 / (differentAlphabets + sameAlphabets));
+		return (sameAlphabets * MAX_ALPHABETIC_POINT / (differentAlphabets + sameAlphabets));
 	}
 
 private:
@@ -113,5 +112,7 @@ private:
 
 	string m_originalString;
 	static constexpr int MAX_LENGTH_POINT = 60;
+	static constexpr int MAX_ALPHABETIC_POINT = 40;
+	static constexpr int MIN_POINT = 0;
 	static constexpr int NUMBER_OF_ALPHABETS = 'Z' - 'A' + 1;
 ;};
